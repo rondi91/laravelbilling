@@ -13,6 +13,6 @@ class PaketInternetSeeder extends Seeder
      */
     public function run(): void
     {
-        PaketInternet::factory()->count(5)->create();
+        // PaketInternet::factory()->count(5)->create();
     }
 }

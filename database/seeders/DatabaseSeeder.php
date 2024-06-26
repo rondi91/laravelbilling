@@ -27,9 +27,24 @@ class DatabaseSeeder extends Seeder
                 PelangganSeeder::class,
               
             ]);
-             $this->call([
-                PaketInternetSeeder::class,
+            //  $this->call([
+            //     PaketInternetSeeder::class,
               
+            // ]);
+            PaketInternet::create([
+                'nama_paket' =>'PAKET 2M',
+                'kecepatan'=>'2',
+                'harga'=>'100000',
+            ]);
+            PaketInternet::create([
+                'nama_paket' =>'PAKET 5M',
+                'kecepatan'=>'5',
+                'harga'=>'150000',
+            ]);
+            PaketInternet::create([
+                'nama_paket' =>'PAKET 10M',
+                'kecepatan'=>'10',
+                'harga'=>'200000',
             ]);
              $this->call([
                 PenagihanSeeder::class,
