@@ -50,5 +50,9 @@ class DatabaseSeeder extends Seeder
                 PenagihanSeeder::class,
               
             ]);
+             $this->call([
+                PembayaranSeeder::class,
+              
+            ]);
     }
 }
