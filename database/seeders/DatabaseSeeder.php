@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\PaketInternet;
 use Illuminate\Database\Seeder;
 
 
@@ -23,6 +25,10 @@ class DatabaseSeeder extends Seeder
 
              $this->call([
                 PelangganSeeder::class,
+              
+            ]);
+             $this->call([
+                PaketInternetSeeder::class,
               
             ]);
     }

@@ -17,7 +17,10 @@ class PaketInternetFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-        ];
+            'nama_paket' => $this->faker->words(2, true), // Contoh: 'Paket Hemat', 'Paket Super'
+            'kecepatan' => $this->faker->numberBetween(1, 100), // Kecepatan antara 1 Mbps sampai 100 Mbps
+            'harga' => $this->faker->numberBetween(50000, 1000000), // Harga antara Rp 50.000 sampai Rp 1.000.000
+            ];
+        
     }
 }
