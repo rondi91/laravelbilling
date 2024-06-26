@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\PaketInternet;
+use App\Models\pelanggan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class PenagihanFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-        ];
+            'pelanggan_id' => pelanggan::inRandomOrder()->first()->id,
+            'paket_internet_id' => PaketInternet::inRandomOrder()->first()->id,
+            'tanggal_penagihan' => $this->faker->date(),
+            ];
     }
 }

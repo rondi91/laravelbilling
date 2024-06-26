@@ -31,5 +31,9 @@ class DatabaseSeeder extends Seeder
                 PaketInternetSeeder::class,
               
             ]);
+             $this->call([
+                PenagihanSeeder::class,
+              
+            ]);
     }
 }

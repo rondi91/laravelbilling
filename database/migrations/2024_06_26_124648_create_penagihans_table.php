@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penagihans', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->foreignId('pelanggan_id')->constrained();
+            $table->foreignId('paket_internet_id')->constrained();
+            $table->date('tanggal_penagihan');
             $table->timestamps();
+          
+            
         });
     }
 
