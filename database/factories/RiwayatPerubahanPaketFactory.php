@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\PaketInternet;
+use App\Models\pelanggan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,16 @@ class RiwayatPerubahanPaketFactory extends Factory
      */
     public function definition(): array
     {
+        $id_pelanggan = pelanggan::inRandomOrder()->first()->id;
+        $paket_lama = PaketInternet::inRandomOrder()->first()->id;
+        $paket_baru = PaketInternet::where('id', '!=', $paket_lama)->inRandomOrder()->first()->id;
+    
         return [
-            //
+            'pelanggan_id' => $id_pelanggan,
+            'paket_lama_id' => $paket_lama,
+            'paket_baru_id' => $paket_baru,
+            'tanggal_perubahan' => $this->faker->date(),
         ];
+       
     }
 }
