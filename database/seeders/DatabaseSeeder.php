@@ -58,5 +58,9 @@ class DatabaseSeeder extends Seeder
                 RiwayatPerubahanPaketSeeder::class,
               
             ]);
+             $this->call([
+                SubscriptionSeeder::class,
+              
+            ]);
     }
 }

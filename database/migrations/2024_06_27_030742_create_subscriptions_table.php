@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pelanggan_id')->constrained('pelanggans');
+            $table->foreignId('paket_id')->constrained('paket_internets');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_berakhir');
+            $table->string('status', 20);
             $table->timestamps();
         });
     }
