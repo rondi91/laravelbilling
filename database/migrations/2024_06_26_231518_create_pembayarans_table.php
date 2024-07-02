@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('penagihan_id')->constrained();
             $table->integer('jumlah');
+            // $table->decimal('jumlah', 10, 2);
             $table->date('tanggal_pembayaran');
             $table->string('metode_pembayaran', 50);
             $table->timestamps();

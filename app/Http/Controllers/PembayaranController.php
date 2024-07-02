@@ -13,7 +13,8 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        //
+        $pembayarans = Pembayaran::with('penagihan')->get();
+        return view('pembayarans.index', compact('pembayarans'));
     }
 
     /**
@@ -21,7 +22,8 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        //
+        $penagihans = Penagihan::all();
+        return view('pembayarans.create', compact('penagihans'));
     }
 
     /**
@@ -29,7 +31,15 @@ class PembayaranController extends Controller
      */
     public function store(StorePembayaranRequest $request)
     {
-        //
+        $request->validate([
+            'id_penagihan' => 'required|exists:penagihans,id_penagihan',
+            'tanggal_pembayaran' => 'required|date',
+            'jumlah' => 'required|numeric',
+        ]);
+
+        Pembayaran::create($request->all());
+        return redirect()->route('pembayarans.index')
+                         ->with('success', 'Pembayaran created successfully.');
     }
 
     /**
@@ -37,7 +47,7 @@ class PembayaranController extends Controller
      */
     public function show(Pembayaran $pembayaran)
     {
-        //
+        return view('pembayarans.show', compact('pembayaran'));
     }
 
     /**
@@ -45,7 +55,8 @@ class PembayaranController extends Controller
      */
     public function edit(Pembayaran $pembayaran)
     {
-        //
+        $penagihans = Penagihan::all();
+        return view('pembayarans.edit', compact('pembayaran', 'penagihans'));
     }
 
     /**
@@ -53,7 +64,15 @@ class PembayaranController extends Controller
      */
     public function update(UpdatePembayaranRequest $request, Pembayaran $pembayaran)
     {
-        //
+        $request->validate([
+            'id_penagihan' => 'required|exists:penagihans,id_penagihan',
+            'tanggal_pembayaran' => 'required|date',
+            'jumlah' => 'required|numeric',
+        ]);
+
+        $pembayaran->update($request->all());
+        return redirect()->route('pembayarans.index')
+                         ->with('success', 'Pembayaran updated successfully.');
     }
 
     /**
@@ -61,6 +80,8 @@ class PembayaranController extends Controller
      */
     public function destroy(Pembayaran $pembayaran)
     {
-        //
+        $pembayaran->delete();
+        return redirect()->route('pembayarans.index')
+                         ->with('success', 'Pembayaran deleted successfully.');
     }
 }

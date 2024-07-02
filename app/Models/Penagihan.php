@@ -13,5 +13,11 @@ class Penagihan extends Model
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class, 'id', 'id');
+
+    }
+
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class, 'penagihan_id', 'penagihan_id');
     }
 }
