@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_paket');
             $table->integer('kecepatan');
             $table->integer('harga');
+            // $table->decimal('harga', 10, 2); // harga dalam rupiah
             $table->timestamps();
         });
     }

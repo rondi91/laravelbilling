@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaketInternetController;
 use App\Http\Controllers\PelangganController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,8 @@ Route::get('/', function () {
 });
 // Pelanggan 
 Route::resource('pelanggans', PelangganController::class);
+
+// Paket 
+Route::resource('paket_internets', PaketInternetController::class);
+
 

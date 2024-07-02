@@ -1,8 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
+
 <div class="container">
-    <h2>Daftar Pelanggan</h2>
+    <h2>Daftar Pelanggan</h2> <br>
     <a href="{{ route('pelanggans.create') }}" class="btn btn-success">Tambah Pelanggan</a>
     <table class="table mt-3">
         <thead>
@@ -21,7 +22,7 @@
                 <td>{{ $pelanggan->id }}</td>
                 <td>{{ $pelanggan->nama }}</td>
                 <td>{{ $pelanggan->alamat }}</td>
-                <td>{{ $pelanggan->telepon }}</td>
+                <td>{{ $pelanggan->no_telepon }}</td>
                 <td>{{ $pelanggan->email }}</td>
                 <td>
                     <a href="{{ route('pelanggans.show', $pelanggan->id) }}" class="btn btn-info">Lihat</a>

@@ -33,7 +33,7 @@ class PelangganController extends Controller
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
-            'telepon' => 'required',
+            'no_telepon' => 'required',
             'email' => 'required|email|unique:pelanggans,email',
         ]);
 
@@ -66,8 +66,8 @@ class PelangganController extends Controller
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
-            'telepon' => 'required',
-            'email' => 'required|email|unique:pelanggans,email,' . $pelanggan->id_pelanggan,
+            'no_telepon' => 'required',
+            'email' => 'required|email|unique:pelanggans,email,' . $pelanggan->id,
         ]);
 
         $pelanggan->update($request->all());

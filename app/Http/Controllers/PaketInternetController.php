@@ -13,7 +13,8 @@ class PaketInternetController extends Controller
      */
     public function index()
     {
-        //
+        $paketInternets = PaketInternet::all();
+        return view('paket_internets.index', compact('paketInternets'));
     }
 
     /**
@@ -21,7 +22,7 @@ class PaketInternetController extends Controller
      */
     public function create()
     {
-        //
+        return view('paket_internets.create');
     }
 
     /**
@@ -29,7 +30,15 @@ class PaketInternetController extends Controller
      */
     public function store(StorePaketInternetRequest $request)
     {
-        //
+        $request->validate([
+            'nama_paket' => 'required',
+            'kecepatan' => 'required|integer',
+            'harga' => 'required|numeric',
+        ]);
+
+        PaketInternet::create($request->all());
+        return redirect()->route('paket_internets.index')
+                         ->with('success', 'Paket Internet created successfully.');
     }
 
     /**
@@ -37,7 +46,9 @@ class PaketInternetController extends Controller
      */
     public function show(PaketInternet $paketInternet)
     {
-        //
+        // return view('paket_internets.show', compact('paketInternet'));
+        $pelanggans = $paketInternet->pelanggans;
+        return view('paket_internets.show', compact('paketInternet', 'pelanggans'));
     }
 
     /**
@@ -45,7 +56,7 @@ class PaketInternetController extends Controller
      */
     public function edit(PaketInternet $paketInternet)
     {
-        //
+        return view('paket_internets.edit', compact('paketInternet'));
     }
 
     /**
@@ -53,7 +64,15 @@ class PaketInternetController extends Controller
      */
     public function update(UpdatePaketInternetRequest $request, PaketInternet $paketInternet)
     {
-        //
+        $request->validate([
+            'nama_paket' => 'required',
+            'kecepatan' => 'required|integer',
+            'harga' => 'required|numeric',
+        ]);
+
+        $paketInternet->update($request->all());
+        return redirect()->route('paket_internets.index')
+                         ->with('success', 'Paket Internet updated successfully.');
     }
 
     /**
@@ -61,6 +80,8 @@ class PaketInternetController extends Controller
      */
     public function destroy(PaketInternet $paketInternet)
     {
-        //
+        $paketInternet->delete();
+        return redirect()->route('paket_internets.index')
+                         ->with('success', 'Paket Internet deleted successfully.');
     }
 }

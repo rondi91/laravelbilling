@@ -20,6 +20,7 @@ class PelangganFactory extends Factory
             'nama' => $this->faker->name,
             'alamat' => $this->faker->address,
             'no_telepon' => $this->faker->phoneNumber,
+            'email' => $this->faker->unique()->safeEmail,
         ];
     }
 }

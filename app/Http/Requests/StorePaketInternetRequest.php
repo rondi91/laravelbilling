@@ -11,7 +11,7 @@ class StorePaketInternetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StorePaketInternetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_paket' => 'required|string|max:255',
+            'kecepatan' => 'required|integer|min:1',
+            'harga' => 'required|numeric|min:0',
         ];
     }
 }

@@ -42,19 +42,38 @@
       @include('layouts.partials._sidebar')
       <!-- partial -->
 
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
 
-      <!-- content-wrapper start -->
-      @yield('content')
-        <!-- content-wrapper ends -->
+                <!-- content-wrapper start -->
+                @yield('content')
+                <!-- content-wrapper ends -->
 
 
+
+              </div>
+           </div>
+          </div>
+        </div>
+        </div>
+        
+      
+
+
+      
 
         <!-- partial:partials/_footer.html -->
-        @include('layouts.partials._footer')
+       
         <!-- partial -->
-      </div>
+      
+      
+      @include('layouts.partials._footer')
       <!-- main-panel ends -->
-    </div>   
+
+    
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
