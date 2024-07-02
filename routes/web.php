@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PaketInternetController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PenagihanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,8 @@ Route::resource('pelanggans', PelangganController::class);
 
 // Paket 
 Route::resource('paket_internets', PaketInternetController::class);
+
+// Penagihan
+Route::resource('penagihans', PenagihanController::class);
 
 

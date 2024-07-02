@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Penagihan;
 use App\Http\Requests\StorePenagihanRequest;
 use App\Http\Requests\UpdatePenagihanRequest;
+use App\Models\pelanggan;
 
 class PenagihanController extends Controller
 {
@@ -13,7 +14,8 @@ class PenagihanController extends Controller
      */
     public function index()
     {
-        //
+        $penagihans = Penagihan::with('pelanggan')->get();
+        return view('penagihans.index', compact('penagihans'));
     }
 
     /**
@@ -21,7 +23,8 @@ class PenagihanController extends Controller
      */
     public function create()
     {
-        //
+        $pelanggans = Pelanggan::all();
+        return view('penagihans.create', compact('pelanggans'));
     }
 
     /**
@@ -29,7 +32,16 @@ class PenagihanController extends Controller
      */
     public function store(StorePenagihanRequest $request)
     {
-        //
+        $request->validate([
+            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
+            'tanggal_penagihan' => 'required|date',
+            'jumlah' => 'required|numeric',
+            'status' => 'required|boolean',
+        ]);
+
+        Penagihan::create($request->all());
+        return redirect()->route('penagihans.index')
+                         ->with('success', 'Penagihan created successfully.');
     }
 
     /**
@@ -37,7 +49,7 @@ class PenagihanController extends Controller
      */
     public function show(Penagihan $penagihan)
     {
-        //
+        return view('penagihans.show', compact('penagihan'));
     }
 
     /**
@@ -45,7 +57,8 @@ class PenagihanController extends Controller
      */
     public function edit(Penagihan $penagihan)
     {
-        //
+        $pelanggans = pelanggan::all();
+        return view('penagihans.edit', compact('penagihan', 'pelanggans'));
     }
 
     /**
@@ -53,7 +66,17 @@ class PenagihanController extends Controller
      */
     public function update(UpdatePenagihanRequest $request, Penagihan $penagihan)
     {
-        //
+        $request->validate([
+            'id' => 'required|exists:pelanggans,pelanggan_id',
+            'tanggal_penagihan' => 'required|date',
+            'jumlah' => 'required|numeric',
+            'status' => 'required|boolean',
+        ]);
+
+        $penagihan->update($request->all());
+        return redirect()->route('penagihans.index')
+                         ->with('success', 'Penagihan updated successfully.');
+    
     }
 
     /**
@@ -61,6 +84,8 @@ class PenagihanController extends Controller
      */
     public function destroy(Penagihan $penagihan)
     {
-        //
+        $penagihan->delete();
+        return redirect()->route('penagihans.index')
+                         ->with('success', 'Penagihan deleted successfully.');
     }
 }

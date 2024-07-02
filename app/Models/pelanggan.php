@@ -17,4 +17,8 @@ class pelanggan extends Model
     {
         return $this->belongsTo(PaketInternet::class, '', '');
     }
+    public function penagihans()
+    {
+        return $this->hasMany(Penagihan::class, 'pelanggan_id', 'pelanggan_id');
+    }
 }
