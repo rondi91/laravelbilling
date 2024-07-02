@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>Edit Pembayaran</h2>
-    <form action="{{ route('pembayarans.update', $pembayaran->id_pembayaran) }}" method="POST">
+    <form action="{{ route('pembayarans.update', $pembayaran->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
