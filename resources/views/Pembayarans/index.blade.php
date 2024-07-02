@@ -18,7 +18,7 @@
             @foreach ($pembayarans as $pembayaran)
             <tr>
                 <td>{{ $pembayaran->id }}</td>
-                <td>{{ $pembayaran->penagihan->id_penagihan }}</td>
+                <td>{{ $pembayaran->penagihan->id }}</td>
                 <td>{{ $pembayaran->tanggal_pembayaran }}</td>
                 <td>{{ $pembayaran->jumlah }}</td>
                 <td>
