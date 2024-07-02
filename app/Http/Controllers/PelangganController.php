@@ -13,7 +13,8 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        //
+        $pelanggans = Pelanggan::all();
+        return view('pelanggans.index', compact('pelanggans'));
     }
 
     /**
@@ -21,7 +22,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        //
+        return view('pelanggans.create');
     }
 
     /**
@@ -29,7 +30,16 @@ class PelangganController extends Controller
      */
     public function store(StorepelangganRequest $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'email' => 'required|email|unique:pelanggans,email',
+        ]);
+
+        Pelanggan::create($request->all());
+        return redirect()->route('pelanggans.index')
+                         ->with('success', 'Pelanggan created successfully.');
     }
 
     /**
@@ -37,7 +47,7 @@ class PelangganController extends Controller
      */
     public function show(pelanggan $pelanggan)
     {
-        //
+        return view('pelanggans.show', compact('pelanggan'));
     }
 
     /**
@@ -45,7 +55,7 @@ class PelangganController extends Controller
      */
     public function edit(pelanggan $pelanggan)
     {
-        //
+        return view('pelanggans.edit', compact('pelanggan'));
     }
 
     /**
@@ -53,7 +63,18 @@ class PelangganController extends Controller
      */
     public function update(UpdatepelangganRequest $request, pelanggan $pelanggan)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'email' => 'required|email|unique:pelanggans,email,' . $pelanggan->id_pelanggan,
+        ]);
+
+        $pelanggan->update($request->all());
+        return redirect()->route('pelanggans.index')
+                         ->with('success', 'Pelanggan updated successfully.');
+    
+
     }
 
     /**
@@ -61,6 +82,8 @@ class PelangganController extends Controller
      */
     public function destroy(pelanggan $pelanggan)
     {
-        //
+        $pelanggan->delete();
+        return redirect()->route('pelanggans.index')
+                         ->with('success', 'Pelanggan deleted successfully.');
     }
 }
