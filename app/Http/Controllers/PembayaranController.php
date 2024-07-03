@@ -6,6 +6,7 @@ use App\Models\Pembayaran;
 use App\Http\Requests\StorePembayaranRequest;
 use App\Http\Requests\UpdatePembayaranRequest;
 use App\Models\Penagihan;
+use Illuminate\Support\Facades\Validator;
 
 class PembayaranController extends Controller
 {
@@ -32,15 +33,28 @@ class PembayaranController extends Controller
      */
     public function store(StorePembayaranRequest $request)
     {
-        $request->validate([
-            'id_penagihan' => 'required|exists:penagihans,id_penagihan',
+        // dd($request);
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:penagihans,penagihan_id',
+            'jumlah' => 'required|numeric|min:0',
             'tanggal_pembayaran' => 'required|date',
-            'jumlah' => 'required|numeric',
         ]);
 
-        Pembayaran::create($request->all());
-        return redirect()->route('pembayarans.index')
-                         ->with('success', 'Pembayaran created successfully.');
+        if ($validator->fails()) {
+            return redirect()->route('pembayarans.create')
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        try {
+            Pembayaran::create($request->all());
+            return redirect()->route('pembayarans.index')
+                             ->with('success', 'Pembayaran created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('pembayarans.create')
+                             ->with('error', 'Failed to create Pembayaran: ' . $e->getMessage())
+                             ->withInput();
+        }
     }
 
     /**
@@ -65,15 +79,27 @@ class PembayaranController extends Controller
      */
     public function update(UpdatePembayaranRequest $request, Pembayaran $pembayaran)
     {
-        $request->validate([
-            'id_penagihan' => 'required|exists:penagihans,id_penagihan',
+        $validator = Validator::make($request->all(), [
+            'penagihan_id' => 'required|exists:penagihans,penagihan_id',
+            'jumlah' => 'required|numeric|min:0',
             'tanggal_pembayaran' => 'required|date',
-            'jumlah' => 'required|numeric',
         ]);
 
-        $pembayaran->update($request->all());
-        return redirect()->route('pembayarans.index')
-                         ->with('success', 'Pembayaran updated successfully.');
+        if ($validator->fails()) {
+            return redirect()->route('pembayarans.edit', $pembayaran->id_pembayaran)
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        try {
+            $pembayaran->update($request->all());
+            return redirect()->route('pembayarans.index')
+                             ->with('success', 'Pembayaran updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('pembayarans.edit', $pembayaran->id_pembayaran)
+                             ->with('error', 'Failed to update Pembayaran: ' . $e->getMessage())
+                             ->withInput();
+        }
     }
 
     /**

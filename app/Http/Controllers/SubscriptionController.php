@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Subscription;
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Http\Requests\UpdateSubscriptionRequest;
+use App\Models\PaketInternet;
+use App\Models\pelanggan;
 
 class SubscriptionController extends Controller
 {
@@ -13,7 +15,8 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $subscriptions = Subscription::with(['pelanggan', 'paket'])->get();
+        return view('subscriptions.index', compact('subscriptions'));
     }
 
     /**
@@ -21,7 +24,9 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        $pelanggans = Pelanggan::all();
+        $pakets = PaketInternet::all();
+        return view('subscriptions.create', compact('pelanggans', 'pakets'));
     }
 
     /**
@@ -29,7 +34,16 @@ class SubscriptionController extends Controller
      */
     public function store(StoreSubscriptionRequest $request)
     {
-        //
+        $request->validate([
+            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
+            'id_paket' => 'required|exists:paket_internets,id_paket',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'nullable|date',
+        ]);
+
+        Subscription::create($request->all());
+        return redirect()->route('subscriptions.index')
+                         ->with('success', 'Subscription created successfully.');
     }
 
     /**
@@ -37,7 +51,7 @@ class SubscriptionController extends Controller
      */
     public function show(Subscription $subscription)
     {
-        //
+        return view('subscriptions.show', compact('subscription'));
     }
 
     /**
@@ -45,7 +59,9 @@ class SubscriptionController extends Controller
      */
     public function edit(Subscription $subscription)
     {
-        //
+        $pelanggans = pelanggan::all();
+        $pakets = PaketInternet::all();
+        return view('subscriptions.edit', compact('subscription', 'pelanggans', 'pakets'));
     }
 
     /**
@@ -53,7 +69,16 @@ class SubscriptionController extends Controller
      */
     public function update(UpdateSubscriptionRequest $request, Subscription $subscription)
     {
-        //
+        $request->validate([
+            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
+            'id_paket' => 'required|exists:paket_internets,id_paket',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'nullable|date',
+        ]);
+
+        $subscription->update($request->all());
+        return redirect()->route('subscriptions.index')
+                         ->with('success', 'Subscription updated successfully.');
     }
 
     /**
@@ -61,6 +86,8 @@ class SubscriptionController extends Controller
      */
     public function destroy(Subscription $subscription)
     {
-        //
+        $subscription->delete();
+        return redirect()->route('subscriptions.index')
+                         ->with('success', 'Subscription deleted successfully.');
     }
 }

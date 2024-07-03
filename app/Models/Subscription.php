@@ -9,7 +9,7 @@ class Subscription extends Model
 {
     use HasFactory;
 
-    private $guarded =[];
+    protected $guarded =[];
 
 
     public function pelanggan()
@@ -19,6 +19,8 @@ class Subscription extends Model
 
     public function paket()
     {
-        return $this->belongsTo(PaketInternet::class, 'id', 'id');
+        return $this->belongsTo(PaketInternet::class, 'paket_id', 'id');
     }
+
+    
 }

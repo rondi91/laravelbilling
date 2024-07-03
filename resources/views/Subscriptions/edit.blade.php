@@ -3,14 +3,14 @@
 @section('content')
 <div class="container">
     <h2>Edit Subscription</h2>
-    <form action="{{ route('subscriptions.update', $subscription->id_subscription) }}" method="POST">
+    <form action="{{ route('subscriptions.update', $subscription->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="id_pelanggan">Pelanggan:</label>
-            <select class="form-control" id="id_pelanggan" name="id_pelanggan" required>
+            <label for="pelanggan_id">Pelanggan:</label>
+            <select class="form-control" id="pelanggan_id" name="pelanggan_id" required>
                 @foreach ($pelanggans as $pelanggan)
-                <option value="{{ $pelanggan->id_pelanggan }}" {{ $subscription->pelanggan_id == $pelanggan->id ? 'selected' : '' }}>{{ $pelanggan->nama }}</option>
+                <option value="{{ $pelanggan->id }}" {{ $subscription->pelanggan_id == $pelanggan->id ? 'selected' : '' }}>{{ $pelanggan->nama }}</option>
                 @endforeach
             </select>
         </div>

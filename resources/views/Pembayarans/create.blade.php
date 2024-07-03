@@ -6,10 +6,10 @@
     <form action="{{ route('pembayarans.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="id_penagihan">Penagihan:</label>
-            <select class="form-control" id="id_penagihan" name="id_penagihan" required>
+            <label for="penagihan_id">Penagihan:</label>
+            <select class="form-control" id="penagihan_id" name="penagihan_id" required>
                 @foreach ($penagihans as $penagihan)
-                    <option value="{{ $penagihan->id_penagihan }}">{{ $penagihan->id }}</option>
+                    <option value="{{ $penagihan->id }}">{{ $penagihan->id }}</option>
                 @endforeach
             </select>
         </div>
