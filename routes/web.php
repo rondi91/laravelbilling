@@ -4,6 +4,7 @@ use App\Http\Controllers\PaketInternetController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PenagihanController;
+use App\Http\Controllers\RiwayatPerubahanPaketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,10 @@ Route::resource('penagihans', PenagihanController::class);
 
 // pembayaran
 Route::resource('pembayarans', PembayaranController::class);
+
+// riwayat perubahan paket
+Route::resource('riwayat-perubahan-pakets', RiwayatPerubahanPaketController::class);
+
 
 
 
