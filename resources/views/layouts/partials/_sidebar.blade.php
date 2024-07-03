@@ -41,6 +41,13 @@
               <span class="menu-title">Riwayat Perubahan Paket</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{  route('pembayarans.index') }}">
+              
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Pembayaran</span>
+            </a>
+          </li>
           
         </ul>
       </nav>

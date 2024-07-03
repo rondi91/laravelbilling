@@ -5,6 +5,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PenagihanController;
 use App\Http\Controllers\RiwayatPerubahanPaketController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,8 @@ Route::resource('pembayarans', PembayaranController::class);
 // riwayat perubahan paket
 Route::resource('riwayat-perubahan-pakets', RiwayatPerubahanPaketController::class);
 
+// subscription
 
+Route::resource('subscriptions', SubscriptionController::class);
 
 
