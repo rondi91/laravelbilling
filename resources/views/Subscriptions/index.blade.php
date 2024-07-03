@@ -22,7 +22,7 @@
                 <td>{{ $subscription->pelanggan->nama }}</td>
                 <td>{{ $subscription->paket->nama_paket }}</td>
                 <td>{{ $subscription->tanggal_mulai }}</td>
-                <td>{{ $subscription->tanggal_selesai }}</td>
+                <td>{{ $subscription->tanggal_berakhir }}</td>
                 <td>
                     <a href="{{ route('subscriptions.show', $subscription->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('subscriptions.edit', $subscription->id) }}" class="btn btn-warning">Edit</a>
