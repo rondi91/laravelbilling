@@ -24,11 +24,11 @@ class PenagihanController extends Controller
      */
     public function create()
     {
-        // $pelanggans = Pelanggan::all();
-        // return view('penagihans.create', compact('pelanggans'));
+        $pelanggans = Pelanggan::all();
+        return view('penagihans.create', compact('pelanggans'));
 
-        $subscriptions = Subscription::with('paket', 'pelanggan')->get();
-        return view('penagihans.create', compact('subscriptions'));
+        // $subscriptions = Subscription::with('paket', 'pelanggan')->get();
+        // return view('penagihans.create', compact('subscriptions'));
 
 
     }

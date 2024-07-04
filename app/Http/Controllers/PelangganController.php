@@ -102,4 +102,15 @@ class PelangganController extends Controller
         return redirect()->route('pelanggans.index')
                          ->with('success', 'Pelanggan deleted successfully.');
     }
+
+    public function getSubscription($id)
+    {
+        $pelanggan = Pelanggan::with('subscription.paket')->find($id);
+
+        if (!$pelanggan) {
+            return response()->json(['message' => 'Pelanggan not found'], 404);
+        }
+
+        return response()->json(['subscription' => $pelanggan->subscription]);
+    }
 }

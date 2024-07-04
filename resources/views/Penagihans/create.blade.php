@@ -15,14 +15,12 @@
     <form action="{{ route('penagihans.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="id_subscription">Subscription:</label>
-            <select class="form-control" id="id_subscription" name="id_subscription" required>
-                <option value="">Pilih Subscription</option>
-                @foreach ($subscriptions as $subscription)
-                    <option value="{{ $subscription->id_subscription }}" 
-                        data-harga="{{ $subscription->paket->harga }}"
-                        data-nama-paket="{{ $subscription->paket->nama_paket }}">
-                        {{ $subscription->pelanggan->nama }} - {{ $subscription->paket->nama_paket }}
+            <label for="pelanggan_id">Pelanggan:</label>
+            <select class="form-control" id="pelanggan_id" name="pelanggan_id" required>
+                <option value="">Pilih Pelanggan</option>
+                @foreach ($pelanggans as $pelanggan)
+                    <option value="{{ $pelanggan->id }}">
+                        {{ $pelanggan->nama }}
                     </option>
                 @endforeach
             </select>
@@ -39,6 +37,7 @@
             <label for="tanggal_penagihan">Tanggal Penagihan:</label>
             <input type="date" class="form-control" id="tanggal_penagihan" name="tanggal_penagihan" value="{{ old('tanggal_penagihan') }}" required>
         </div>
+        <input type="hidden" id="id_subscription" name="id_subscription">
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
@@ -46,13 +45,28 @@
 
 @section('scripts')
 <script>
-    document.getElementById('id_subscription').addEventListener('change', function() {
-        var selectedOption = this.options[this.selectedIndex];
-        var harga = selectedOption.getAttribute('data-harga');
-        var namaPaket = selectedOption.getAttribute('data-nama-paket');
-        
-        document.getElementById('jumlah').value = harga;
-        document.getElementById('nama_paket').value = namaPaket;
+    document.getElementById('pelanggan_id').addEventListener('change', function() {
+        var pelangganId = this.value;
+
+        if (pelangganId) {
+            fetch(`/api/pelanggan/${pelangganId}/subscription`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.subscription) {
+                        document.getElementById('nama_paket').value = data.subscription.paket.nama_paket;
+                        document.getElementById('jumlah').value = data.subscription.paket.harga;
+                        document.getElementById('id_subscription').value = data.subscription.id_subscription;
+                    } else {
+                        document.getElementById('nama_paket').value = '';
+                        document.getElementById('jumlah').value = '';
+                        document.getElementById('id_subscription').value = '';
+                    }
+                });
+        } else {
+            document.getElementById('nama_paket').value = '';
+            document.getElementById('jumlah').value = '';
+            document.getElementById('id_subscription').value = '';
+        }
     });
 </script>
 @endsection
