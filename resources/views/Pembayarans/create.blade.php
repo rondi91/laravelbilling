@@ -9,7 +9,7 @@
             <label for="penagihan_id">Penagihan:</label>
             <select class="form-control" id="penagihan_id" name="penagihan_id" required>
                 @foreach ($penagihans as $penagihan)
-                    <option value="{{ $penagihan->id }}">{{ $penagihan->id }}</option>
+                    <option value="{{ $penagihan->id }}">{{ $penagihan->pelanggan->nama }}</option>
                 @endforeach
             </select>
         </div>

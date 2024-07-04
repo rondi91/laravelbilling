@@ -6,6 +6,7 @@ use App\Models\Penagihan;
 use App\Http\Requests\StorePenagihanRequest;
 use App\Http\Requests\UpdatePenagihanRequest;
 use App\Models\pelanggan;
+use App\Models\Subscription;
 
 class PenagihanController extends Controller
 {
@@ -23,8 +24,13 @@ class PenagihanController extends Controller
      */
     public function create()
     {
-        $pelanggans = Pelanggan::all();
-        return view('penagihans.create', compact('pelanggans'));
+        // $pelanggans = Pelanggan::all();
+        // return view('penagihans.create', compact('pelanggans'));
+
+        $subscriptions = Subscription::with('paket', 'pelanggan')->get();
+        return view('penagihans.create', compact('subscriptions'));
+
+
     }
 
     /**
@@ -33,10 +39,11 @@ class PenagihanController extends Controller
     public function store(StorePenagihanRequest $request)
     {
         $request->validate([
-            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
+            'pelanggan_id' => 'required|exists:pelanggans,id',
             'tanggal_penagihan' => 'required|date',
-            'jumlah' => 'required|numeric',
-            'status' => 'required|boolean',
+            // 'jumlah' => 'required|numeric',
+            // 'status' => 'required|boolean',
+          
         ]);
 
         Penagihan::create($request->all());
