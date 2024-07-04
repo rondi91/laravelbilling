@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('penagihans', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('pelanggan_id')->constrained();
-            $table->foreignId('paket_internet_id')->constrained();
+            $table->foreignId('paket_internet_id')->default(1)->constrained();
             $table->date('tanggal_penagihan');
             $table->timestamps();
           

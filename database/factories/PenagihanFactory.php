@@ -22,6 +22,7 @@ class PenagihanFactory extends Factory
             'pelanggan_id' => pelanggan::inRandomOrder()->first()->id,
             'paket_internet_id' => PaketInternet::inRandomOrder()->first()->id,
             'tanggal_penagihan' => $this->faker->date(),
+            'jumlah' => $this->faker->randomFloat(2, 100000, 1000000),
             ];
     }
 }

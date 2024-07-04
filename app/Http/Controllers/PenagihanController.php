@@ -33,11 +33,13 @@ class PenagihanController extends Controller
     public function store(StorePenagihanRequest $request)
     {
         $request->validate([
-            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
+            'pelanggan_id' => 'required|exists:pelanggans,id',
             'tanggal_penagihan' => 'required|date',
             'jumlah' => 'required|numeric',
             'status' => 'required|boolean',
+           
         ]);
+        // $request['paket_internet_id'=>'1'];
 
         Penagihan::create($request->all());
         return redirect()->route('penagihans.index')
