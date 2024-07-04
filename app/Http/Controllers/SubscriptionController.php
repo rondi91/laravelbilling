@@ -35,17 +35,16 @@ class SubscriptionController extends Controller
     public function store(StoreSubscriptionRequest $request)
     {
         $request->validate([
-            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
-            'id_paket' => 'required|exists:paket_internets,id_paket',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'nullable|date',
+            'pelanggan_id' => 'required|exists:pelanggans,pelanggan_id',
+            'paket_id' => 'required|exists:paket_internets,paket_id',
+            'tanggal_mulai' => 'required|date'
         ]);
 
         Subscription::create($request->all());
+
         return redirect()->route('subscriptions.index')
                          ->with('success', 'Subscription created successfully.');
     }
-
     /**
      * Display the specified resource.
      */
@@ -70,8 +69,8 @@ class SubscriptionController extends Controller
     public function update(UpdateSubscriptionRequest $request, Subscription $subscription)
     {
         $request->validate([
-            'id_pelanggan' => 'required|exists:pelanggans,id_pelanggan',
-            'id_paket' => 'required|exists:paket_internets,id_paket',
+            'pelanggan_id' => 'required|exists:pelanggans,id_pelanggan',
+            'paket_id' => 'required|exists:paket_internets,paket_id',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'nullable|date',
         ]);

@@ -17,4 +17,8 @@ class PaketInternet extends Model
     {
         return $this->hasMany(Pelanggan::class, 'id', 'id');
     }
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'paket_id', 'paket_id');
+    }
 }

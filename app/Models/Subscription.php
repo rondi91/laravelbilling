@@ -14,13 +14,15 @@ class Subscription extends Model
 
     public function pelanggan()
     {
-        return $this->belongsTo(Pelanggan::class, 'id', 'id');
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id', 'id');
     }
 
     public function paket()
     {
         return $this->belongsTo(PaketInternet::class, 'paket_id', 'id');
     }
+
+    
 
     
 }

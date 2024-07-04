@@ -22,7 +22,7 @@
                 <td>{{ $penagihan->pelanggan->nama }}</td>
                 <td>{{ $penagihan->tanggal_penagihan }}</td>
                 <td>{{ $penagihan->jumlah }}</td>
-                <td>{{ $penagihan->status ? 'Lunas' : 'Belum Lunas' }}</td>
+                <td>{{ $penagihan->status ? ' Belum Lunas' : ' Lunas' }}</td>
                 <td>
                     <a href="{{ route('penagihans.show', $penagihan->id) }}" class="btn btn-info">Lihat</a>
                     <a href="{{ route('penagihans.edit', $penagihan->id) }}" class="btn btn-warning">Edit</a>
