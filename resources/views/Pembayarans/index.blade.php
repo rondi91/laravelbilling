@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID Penagihan</th>
+                <th>ID Penagihan / nama pelanggan</th>
                 <th>Tanggal Pembayaran</th>
                 <th>Jumlah</th>
                 <th>Aksi</th>
@@ -18,7 +18,7 @@
             @foreach ($pembayarans as $pembayaran)
             <tr>
                 <td>{{ $pembayaran->id }}</td>
-                <td>{{ $pembayaran->penagihan->id }}</td>
+                <td>{{ $pembayaran->penagihan->pelanggan->nama }}</td>
                 <td>{{ $pembayaran->tanggal_pembayaran }}</td>
                 <td>{{ $pembayaran->jumlah }}</td>
                 <td>

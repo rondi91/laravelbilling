@@ -35,8 +35,8 @@ class SubscriptionController extends Controller
     public function store(StoreSubscriptionRequest $request)
     {
         $request->validate([
-            'pelanggan_id' => 'required|exists:pelanggans,pelanggan_id',
-            'paket_id' => 'required|exists:paket_internets,paket_id',
+            'pelanggan_id' => 'required|exists:pelanggans,id',
+            'paket_id' => 'required|exists:paket_internets,id',
             'tanggal_mulai' => 'required|date'
         ]);
 

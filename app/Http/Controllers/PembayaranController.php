@@ -35,11 +35,11 @@ class PembayaranController extends Controller
     {
         // dd($request);
         $validator = Validator::make($request->all(), [
-            'id' => 'required|exists:penagihans,penagihan_id',
+            'penagihan_id' => 'required|exists:penagihans,id',
             'jumlah' => 'required|numeric|min:0',
             'tanggal_pembayaran' => 'required|date',
         ]);
-
+        $request["metode_pembayaran"] = "transfer bank";
         if ($validator->fails()) {
             return redirect()->route('pembayarans.create')
                              ->withErrors($validator)
